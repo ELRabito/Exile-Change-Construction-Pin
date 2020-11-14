@@ -4,7 +4,7 @@ This enables PIN code change on objects like doors/gates/hatches/drawbridges etc
 
 
 # Installation 
-* Replace the code of @ExileServer\addons\exile_server\code\ExileServer_object_lock_network_setPin.sqf with the code below
+* Replace @ExileServer\addons\exile_server\code\ExileServer_object_lock_network_setPin.sqf
 
 * Add this to class Construction of the CfgInteractionMenus inside mission config.cpp
 
