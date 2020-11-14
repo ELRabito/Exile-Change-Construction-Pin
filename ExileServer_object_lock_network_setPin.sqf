@@ -28,8 +28,8 @@ if !(isNull _flag) then
 		_constructionBlockDuration = getNumber (missionConfigFile >> "CfgTerritories" >> "constructionBlockDuration");
 		if (time - _lastAttackedAt < _constructionBlockDuration * 60) then
 		{
-			_couldChangePin = false;
-			[_sessionID, "setPinResponse", [["ErrorTitleAndText", ["Under Attack!", "You cant change the code, get rid of the attackers first!"]], "", ""]] call ExileServer_system_network_send_to;
+			_couldChangePin = false;			
+			[_sessionID, "toastRequest", ["ErrorTitleAndText", ["Pin change failed!", format ["Territory has been under attack within the last %1 minutes.!", _constructionBlockDuration]]]] call ExileServer_system_network_send_to;
 		};
 	};
 };
