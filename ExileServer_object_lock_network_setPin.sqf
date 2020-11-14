@@ -9,7 +9,7 @@
  * To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-nd/4.0/.
  */
  
-private["_sessionID", "_parameters", "_object", "_pincode", "_newPinCode", "_objectPinCode", "_databaseID", "_canChangePin", "_flag", "_lastAttackedAt", "_constructionBlockDuration"];
+private["_sessionID", "_parameters", "_object", "_pincode", "_newPinCode", "_objectPinCode", "_databaseID", "_couldChangePin", "_flag", "_lastAttackedAt", "_constructionBlockDuration"];
 _sessionID = _this select 0;
 _parameters = _this select 1;
 _object = objectFromNetId (_parameters select 0);
@@ -17,7 +17,7 @@ _pincode = _parameters select 1;
 _newPinCode = _parameters select 2;
 _objectPinCode = _object getVariable ["ExileAccessCode", "000000"];
 _databaseID = _object getVariable ["ExileDatabaseID",0];
-_canChangePin = true;
+_couldChangePin = true;
 
 _flag = _object call ExileClient_util_world_getTerritoryAtPosition;
 if !(isNull _flag) then
@@ -28,13 +28,13 @@ if !(isNull _flag) then
 		_constructionBlockDuration = getNumber (missionConfigFile >> "CfgTerritories" >> "constructionBlockDuration");
 		if (time - _lastAttackedAt < _constructionBlockDuration * 60) then
 		{
-			_canChangePin = false;
+			_couldChangePin = false;
 			[_sessionID, "setPinResponse", [["ErrorTitleAndText", ["Under Attack!", "You cant change the code, get rid of the attackers first!"]], "", ""]] call ExileServer_system_network_send_to;
 		};
 	};
 };
 
-if(_canChangePin) then 
+if(_couldChangePin) then 
 {
 
 	if(_pincode isEqualTo _objectPinCode)then
